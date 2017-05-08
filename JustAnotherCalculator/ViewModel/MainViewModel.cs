@@ -14,8 +14,9 @@ namespace JustAnotherCalculator.ViewModel
             }
             else
             {
-                HelloWorld = "Yeap, MVVM works..";
             }
+
+            HelloWorld = "Yeap, MVVM works..";
         }
 
         #region Property HelloWorld
