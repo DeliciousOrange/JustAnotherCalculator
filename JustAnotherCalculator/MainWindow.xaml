@@ -10,7 +10,15 @@
         ResizeMode="CanResizeWithGrip"
         GlowBrush="{DynamicResource AccentColorBrush}"
         DataContext="{Binding MainVM, Source={StaticResource Locator}}"
-        Title="MainWindow" Height="281.623" Width="1266.472">
+        Title="MainWindow" Height="627.623" Width="1266.472">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands ShowLastSeparator="False">
+            <Button Command="{Binding DoSave}" Content="SAVE OPERATIONS" ToolTip="Save the list of operations" />
+            <!--Button Command="{Binding DoOpen}" Content="Open saved list" /-->
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

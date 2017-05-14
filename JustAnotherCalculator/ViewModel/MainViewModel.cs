@@ -2,8 +2,11 @@ using Calculator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using JustAnotherCalculator.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,15 +17,12 @@ namespace JustAnotherCalculator.ViewModel
 
         public MainViewModel()
         {
-            if (IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-            }
-            else
-            {
-            }
-
             OperationList = new ObservableCollection<Operation>();
+            
+            if (!this.IsInDesignMode)
+            {
+                DoOpenExecute();
+            }
         }
 
         #region Property UserInput
@@ -172,5 +172,91 @@ namespace JustAnotherCalculator.ViewModel
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
         }
         #endregion
+
+        #region ICommand DoSave
+        private ICommand _doSave;
+        public ICommand DoSave
+        {
+            get
+            {
+                if (_doSave == null)
+                {
+                    _doSave = new RelayCommand(DoSaveExecute); // 
+                }
+                return _doSave;
+            }
+        }
+        private void DoSaveExecute()
+        {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            try
+            {
+                if (OperationList != null)
+                {
+                    var curentState = Newtonsoft.Json.JsonConvert.SerializeObject(OperationList, Formatting.Indented);
+
+                    File.WriteAllText("list.json", curentState, Encoding.UTF8);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception found on DoSaveExecute :" + ex.Message);
+            }
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+        }
+        #endregion
+
+
+        #region ICommand DoOpen
+        private ICommand _doOpen;
+        public ICommand DoOpen
+        {
+            get
+            {
+                if (_doOpen == null)
+                {
+                    _doOpen = new RelayCommand(DoOpenExecute); // RelayCommand
+                }
+                return _doOpen;
+            }
+        }
+        private void DoOpenExecute()
+        {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            try
+            {
+                string jsonContent = File.ReadAllText("list.json");
+                OperationList = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<Operation>>(jsonContent);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception found on DoOpenExecute :" + ex.Message);
+            }
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
