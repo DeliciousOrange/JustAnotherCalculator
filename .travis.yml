@@ -1,6 +1,7 @@
 language: csharp
-solution: JustAnotherCalculator.sln
-dist: trusty
 before_build:
   - nuget restore
+solution: JustAnotherCalculator.sln
+dist: trusty
+
 
