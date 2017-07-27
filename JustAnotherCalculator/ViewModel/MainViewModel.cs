@@ -141,7 +141,6 @@ namespace JustAnotherCalculator.ViewModel
         }
         #endregion
 
-
         #region ICommand DoDeleteOperation
         private ICommand _doDeleteOperation;
         public ICommand DoDeleteOperation
@@ -206,7 +205,6 @@ namespace JustAnotherCalculator.ViewModel
         }
         #endregion
 
-
         #region ICommand DoOpen
         private ICommand _doOpen;
         public ICommand DoOpen
@@ -235,28 +233,6 @@ namespace JustAnotherCalculator.ViewModel
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 }
