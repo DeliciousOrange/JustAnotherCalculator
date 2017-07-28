@@ -10,7 +10,7 @@
         ResizeMode="CanResizeWithGrip"
         GlowBrush="{DynamicResource AccentColorBrush}"
         DataContext="{Binding MainVM, Source={StaticResource Locator}}"
-        Title="Just Another Calculator - v0.1" Height="627.623" Width="1266.472">
+        Title="Just Another Calculator - v0.2" Height="627.623" Width="1266.472">
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands ShowLastSeparator="False">
